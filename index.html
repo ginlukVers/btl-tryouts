@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
     <title>Configurator animation demo</title>
     <style>
     html,
@@ -75,7 +74,7 @@
 <body>
     <div id="main-container">
         <div id="image-container">
-            <img id="hero-lightpass" class="image-frame" src="file:///Users/dz382/Downloads/btl-animation-demo/configurator/src/out/configurator-white-desktop_00001.webp" alt="Image Frame">
+            <img id="hero-lightpass" class="image-frame" src="/out/configurator-white-desktop_00001.webp" alt="Image Frame">
         </div>
         <div id="side-block">
             <button id="loadImages">Next</button>
@@ -91,7 +90,7 @@
 
     const framesPerStep = [20, 38, 10, 1]; // Number of frames to load for each step
 
-    const currentFrame = index => `file:///Users/dz382/Downloads/btl-animation-demo/configurator/src/out/configurator-white-desktop_${index.toString().padStart(5, '0')}.webp`;
+    const currentFrame = index => `/out/configurator-white-desktop_${index.toString().padStart(5, '0')}.webp`;
 
     const preloadFirstImage = () => {
         const img = new Image();
