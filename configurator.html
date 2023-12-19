@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Configurator animation demo</title>
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: linear-gradient(180deg, #DDCDCD 0%, #E2D7D6 48.88%, #E8DFDC 70.15%, #E8E2DE 100%);
+        overflow: hidden;
+    }
+
+    #main-container {
+        display: flex;
+        height: 100vh;
+    }
+
+    #image-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .image-frame {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    #side-block {
+        width: 600px;
+        background-color: #f2f2f2;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        padding-bottom: 20px;
+    }
+
+    #loadImages {
+
+        color: var(--Buttons-button-content-primary, #FFF);
+
+        /* Desktop/Buttons/Medium */
+        font-family: sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 750;
+        line-height: 24px;
+        /* 133.333% */
+        letter-spacing: -0.18px;
+        z-index: 10;
+        display: flex;
+        width: 227px;
+        padding: 20px 40px;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        border: none;
+        border-radius: var(--Radius-full, 1000px);
+        background: var(--Gradient-Button, linear-gradient(266deg, #FF7900 -60.92%, #4B3278 93.86%));
+        cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="main-container">
+        <div id="image-container">
+            <img id="hero-lightpass" class="image-frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator-white-desktop_00001.webp?token=GHSAT0AAAAAACK6BVUOS7JUNOYIWFJ7LUYUZL3BIJQ" alt="Image Frame">
+        </div>
+        <div id="side-block">
+            <button id="loadImages">Next</button>
+            <!-- Additional content for side block -->
+        </div>
+    </div>
+    <script>
+    let currentImageIndex = 1;
+    const frameCount = 68;
+    const imageCache = [null]; // Start with null at index 0 for convenience
+    let currentStep = 1;
+    const frameRate = 100; // Time in milliseconds for each frame
+
+    const framesPerStep = [20, 38, 10, 1]; // Number of frames to load for each step
+
+    const currentFrame = index => `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator-white-desktop_${index.toString().padStart(5, '0')}.webp`;
+
+    const preloadFirstImage = () => {
+        const img = new Image();
+        img.src = currentFrame(1);
+        img.onload = () => {
+            imageCache[1] = img;
+            updateImage(1); // Display the first image
+        };
+    };
+
+    const updateImage = index => {
+        const img = imageCache[index];
+        if (img) {
+            const imageElement = document.getElementById('hero-lightpass');
+            imageElement.src = img.src;
+        }
+    };
+
+    const loadAndDisplayImages = (startIndex, count) => {
+        let loaded = 0;
+        const loadNext = () => {
+            if (loaded < count) {
+                const frameIndex = (startIndex + loaded) % frameCount || frameCount;
+                if (!imageCache[frameIndex]) {
+                    const img = new Image();
+                    img.src = currentFrame(frameIndex);
+                    img.onload = () => {
+                        imageCache[frameIndex] = img;
+                        updateImage(frameIndex);
+                    };
+                } else {
+                    updateImage(frameIndex);
+                }
+                loaded++;
+                setTimeout(loadNext, frameRate);
+            }
+        };
+        loadNext();
+    };
+
+    document.getElementById('loadImages').addEventListener('click', () => {
+        const framesToLoad = framesPerStep[currentStep - 1];
+        loadAndDisplayImages(currentImageIndex, framesToLoad);
+        currentImageIndex = (currentImageIndex + framesToLoad) % frameCount || frameCount;
+        currentStep = currentStep % framesPerStep.length + 1;
+    });
+
+    preloadFirstImage();
+    </script>
+</body>
+
+</html>

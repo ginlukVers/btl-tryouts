@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scroll-triggered Animation</title>
+    <style>
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    #animation-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #frame {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #start-button {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        /* Initially hidden */
+        cursor: pointer;
+    }
+
+    #video-container {
+        width: 10vw;
+        height: 10vh;
+        position: absolute;
+        top: 3000px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        border-radius: 100px;
+        opacity: 0;
+        transition: all 1s ease-in-out;
+        overflow: hidden;
+    }
+
+    #prod-container {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        overflow: hidden;
+        top: calc(3000px + 100vh);
+        background-color: white;
+    }
+
+    #prod-frame {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="animation-container">
+        <img id="frame" src="" alt="Animated Frame">
+    </div>
+    <button id="start-button">Start Scroll Animation</button>
+    <div id="video-container">
+        <video _ngcontent-serverapp-c263="" style="margin: 0 auto;" src="https://api.c0x4utlmj5-philipsdo1-d1-public.model-t.cc.commerce.ondemand.com/medias/sample-1280-xl.mp4?context=bWFzdGVyfHZpZGVvc3w5ODQwNDk3fHZpZGVvL21wNHxhRGM1TDJobE9TODRPRGs0TWpRNE56TTJOems0TDNOaGJYQnNaVjh4TWpnd1gzaHNMbTF3TkF8MWZhZDY2MjE3MGJhZGU1ZWJkZjU3NzE1Yjc5ZDVlYzJmZjYxNDhhM2ExNTg3MzFhNTZkNGE5MjdiYjdhMjAwMw" autoplay muted loop></video>
+    </div>
+    <div id="prod-container">
+        <img id="prod-frame" src="" alt="Product Showcase">
+    </div>
+<script>
+    const frameElement = document.getElementById('frame');
+    const startButton = document.getElementById('start-button');
+    const totalFrames = 249;
+    const initialAnimationFrames = 28;
+    const documentHeight = 9500; // Adjusted to include the product showcase animation height
+    let currentFrame = 0;
+    let scrollAnimationEnabled = false;
+    const frameRate = 1000 / 30; // 30 FPS
+    const scrollAnimationDuration = 6000; // Scroll animation duration in milliseconds
+    const prodAnimationHeight = 3000; // Height for the product animation
+    const prodFrame = document.getElementById('prod-frame');
+    const prodContainerPosition = 9460 + window.innerHeight; // Adjusted for the product showcase animation
+
+    function updateFrame(frameIndex) {
+        frameElement.src = `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/homepage-assets/home-entrance-desktop${frameIndex.toString().padStart(3, '0')}.jpg`;
+    }
+
+    function updateProdFrame(frameIndex) {
+        prodFrame.src = `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/home-product-showcase-desktop/home-product-showcase-desktop${frameIndex.toString().padStart(3, '0')}.jpg`;
+    }
+
+    // Initial animation from frame 1 to 28
+    const initialAnimationInterval = setInterval(() => {
+        if (currentFrame < initialAnimationFrames) {
+            updateFrame(currentFrame);
+            currentFrame++;
+        } else {
+            clearInterval(initialAnimationInterval);
+            currentFrame = initialAnimationFrames - 1;
+            scrollAnimationEnabled = true;
+            startButton.style.display = 'block'; // Show the start button after initial animation
+        }
+    }, frameRate);
+
+    startButton.addEventListener('click', function() {
+        startButton.style.display = 'none'; // Hide start button before starting scroll animation
+        document.body.style.height = `${documentHeight}px`;
+        smoothScrollTo(3000, scrollAnimationDuration); // Scroll to 3000px over 6 seconds
+    });
+
+    window.addEventListener('scroll', () => {
+        if (!scrollAnimationEnabled) return;
+
+        // Update main animation frames
+        const scrollFraction = window.pageYOffset / (documentHeight - window.innerHeight);
+        const frameIndex = Math.min(
+            Math.floor(scrollFraction * totalFrames),
+            totalFrames - 1
+        );
+        updateFrame(frameIndex);
+
+        // Update product showcase frames
+        if (window.pageYOffset >= prodContainerPosition && window.pageYOffset < prodContainerPosition + prodAnimationHeight) {
+            const prodScrollFraction = (window.pageYOffset - prodContainerPosition) / prodAnimationHeight;
+            const prodFrameIndex = Math.min(
+                Math.floor(prodScrollFraction * prodAnimationFrames),
+                prodAnimationFrames - 1
+            );
+            updateProdFrame(prodFrameIndex);
+        }
+    });
+</script>
+
+</body>
+
+</html>

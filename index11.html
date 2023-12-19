@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scroll-triggered Animation</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        height: 10000px;
+        overflow-x: hidden;
+    }
+
+    #animation-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #frame {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #start-button {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        /* Initially hidden */
+        cursor: pointer;
+    }
+
+    #video-container {
+        /* Initial styles for video-container */
+        width: 10vw;
+        height: 10vh;
+        position: absolute;
+        top: 2000px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        border-radius: 100px;
+        opacity: 0;
+        transition: all 1s ease-in-out;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    #prod-container {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: calc(2000px + 100vh);
+        background-color: white;
+    }
+
+    #myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+    }
+    #prod-container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #prod-container-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="animation-container" style="">
+        <img id="frame" src="" alt="Animated Frame">
+    </div>
+    <button id="start-button">Start Scroll Animation</button>
+    <div id="video-container">
+        <!-- <video loop="true" autoplay="autoplay" controls="controls" muted id="myVideo"> -->
+        <video _ngcontent-serverapp-c263="" src="https://api.c0x4utlmj5-philipsdo1-d1-public.model-t.cc.commerce.ondemand.com/medias/sample-1280-xl.mp4?context=bWFzdGVyfHZpZGVvc3w5ODQwNDk3fHZpZGVvL21wNHxhRGM1TDJobE9TODRPRGs0TWpRNE56TTJOems0TDNOaGJYQnNaVjh4TWpnd1gzaHNMbTF3TkF8MWZhZDY2MjE3MGJhZGU1ZWJkZjU3NzE1Yjc5ZDVlYzJmZjYxNDhhM2ExNTg3MzFhNTZkNGE5MjdiYjdhMjAwMw" autoplay style="margin: 0 auto; width: 100%;
+height: 100vh; object-fit: cover;"></video>
+    </div>
+    <div id="prod-container">
+        <h3>Title text</h3>
+        <p>Description text</p>
+        <img id="prod-container-img" src="" alt="Product Showcase">
+        <!-- Other content if needed -->
+    </div>
+    <script>
+    // DOM Elements
+    const frameElement = document.getElementById('frame');
+    const startButton = document.getElementById('start-button');
+    const videoContainer = document.getElementById('video-container');
+    const prodElement = document.getElementById('prod-container-img'); // Ensure you have this element in your HTML
+
+    // Animation Parameters for First Animation
+    const totalFrames = 249;
+    const initialAnimationFrames = 28;
+    const documentHeight = 20000; // Increased to accommodate both animations
+    const frameRate = 1000 / 30; // 30 FPS
+    const scrollAnimationDuration = 3000; // Scroll animation duration in milliseconds
+    const animationStart = 0; // Start of first scroll animation
+    const animationEnd = 2000; // End of first scroll animation
+
+    // Animation Parameters for Prod Container
+    const prodTotalFrames = 360;
+    const prodAnimationStart = 2000; // Start after the first animation ends
+    const prodAnimationEnd = prodAnimationStart + 3000; // 1000px scroll range for prod animation
+
+    // State Variables
+    let currentFrame = 0;
+    let scrollAnimationEnabled = false;
+    const viewportHeight = window.innerHeight;
+
+    // Update Frame Source for First Animation
+    function updateFrame(frameIndex) {
+        frameElement.src = `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/homepage-assets/home-entrance-desktop${frameIndex.toString().padStart(3, '0')}.jpg`;
+    }
+
+    // Update Frame Source for Prod Container
+    function updateProdFrame(frameIndex) {
+        prodElement.src = `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/home-product-showcase-desktop/home-product-showcase-desktop${frameIndex.toString().padStart(3, '0')}.jpg`;
+    }
+
+    // Initial Frame Animation for First Animation
+    function startInitialAnimation() {
+        const initialAnimationInterval = setInterval(() => {
+            if (currentFrame < initialAnimationFrames) {
+                updateFrame(currentFrame);
+                currentFrame++;
+            } else {
+                clearInterval(initialAnimationInterval);
+                currentFrame = initialAnimationFrames - 1;
+                scrollAnimationEnabled = true;
+                startButton.style.display = 'block'; // Show the button
+            }
+        }, frameRate);
+    }
+
+
+    // Smooth Scroll Function
+    function smoothScrollTo(targetPosition, duration) {
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        requestAnimationFrame(animation);
+    }
+
+    // Scroll Event Handler
+    function handleScroll() {
+        const scrollPos = window.pageYOffset;
+
+        // Video Container Animation
+        const viewportMiddle = scrollPos + viewportHeight / 2;
+        if (viewportMiddle >= animationEnd) {
+            videoContainer.style.width = '100vw';
+            videoContainer.style.height = '100vh';
+            videoContainer.style.borderRadius = '0px';
+            videoContainer.style.opacity = 1;
+        } else {
+            videoContainer.style.width = '10vw';
+            videoContainer.style.height = '10vh';
+            videoContainer.style.borderRadius = '100px';
+            videoContainer.style.opacity = 0;
+        }
+
+        // Frame Update for Scroll Animation
+        if (scrollAnimationEnabled) {
+            if (scrollPos >= animationStart && scrollPos <= animationEnd) {
+                const scrollFraction = (scrollPos - animationStart) / (animationEnd - animationStart);
+                const frameIndex = Math.min(
+                    Math.floor(scrollFraction * (totalFrames - initialAnimationFrames)) + initialAnimationFrames,
+                    totalFrames - 1
+                );
+                updateFrame(frameIndex);
+            }
+
+            // Show or hide the start button based on scroll position
+            startButton.style.display = scrollPos === 0 ? 'block' : 'none';
+        }
+
+        // Prod Container Animation Logic
+        if (scrollPos >= prodAnimationStart && scrollPos <= prodAnimationEnd) {
+            const prodScrollFraction = (scrollPos - prodAnimationStart) / (prodAnimationEnd - prodAnimationStart);
+            const prodFrameIndex = Math.min(
+                Math.floor(prodScrollFraction * prodTotalFrames),
+                prodTotalFrames - 1
+            );
+            updateProdFrame(prodFrameIndex);
+        }
+    }
+
+
+    // Event Listeners
+    window.addEventListener('scroll', handleScroll);
+    startButton.addEventListener('click', function() {
+        document.body.style.height = `${documentHeight}px`;
+        smoothScrollTo(animationEnd, scrollAnimationDuration);
+    });
+
+    // Start Initial Animation
+    startInitialAnimation();
+    </script>
+</body>
+
+</html>
