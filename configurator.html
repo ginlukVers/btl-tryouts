@@ -74,7 +74,7 @@
 <body>
     <div id="main-container">
         <div id="image-container">
-            <img id="hero-lightpass" class="image-frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator-white-desktop_00001.webp?token=GHSAT0AAAAAACK6BVUOS7JUNOYIWFJ7LUYUZL3BIJQ" alt="Image Frame">
+            <img id="hero-lightpass" class="image-frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator-white-desktop_00001.webp" alt="Image Frame">
         </div>
         <div id="side-block">
             <button id="loadImages">Next</button>
@@ -90,7 +90,7 @@
 
     const framesPerStep = [20, 38, 10, 1]; // Number of frames to load for each step
 
-    const currentFrame = index => `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator-white-desktop_${index.toString().padStart(5, '0')}.webp`;
+    const currentFrame = index => `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator-white-desktop_${index.toString().padStart(5, '0')}.webp`;
 
     const preloadFirstImage = () => {
         const img = new Image();
