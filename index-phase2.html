@@ -502,7 +502,39 @@ height: 100vh; object-fit: cover;"></video>
             visibleY: true
         }
     });
-    //# sourceURL=pen.js
+
+
+      const appleSequenceImages = [];
+    const treeSequenceImages = [];
+
+    for (let i = 0; i <= 360; i++) {
+        appleSequenceImages.push(`${`000${i}`.slice(-3)}.jpg`);
+    }
+    for (let i = 0; i <= 24; i++) {
+        treeSequenceImages.push(`${`000${i}`.slice(-3)}.jpg`);
+    }
+
+    // Preload function for Apple Sequence
+    function preloadAppleSequence() {
+        appleSequenceImages.forEach(imgName => {
+            const img = new Image();
+            img.src = 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-product-showcase-desktop/home-product-showcase-desktop' + imgName;
+        });
+    }
+
+    // Preload function for Tree Sequence
+    function preloadTreeSequence() {
+        treeSequenceImages.forEach(imgName => {
+            const img = new Image();
+            img.src = 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-configurator/home-configurator-out' + imgName;
+        });
+    }
+
+    // Call preload functions
+    preloadAppleSequence();
+    preloadTreeSequence();
+
+
     </script>
 </body>
 
