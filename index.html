@@ -121,6 +121,24 @@ height: 100vh; object-fit: cover;"></video>
     let scrollAnimationEnabled = false;
     const viewportHeight = window.innerHeight;
 
+    function preloadImages() {
+        // Preload images for the first animation
+        for (let i = 0; i < totalFrames; i++) {
+            const img = new Image();
+            img.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop${i.toString().padStart(3, '0')}.jpg`;
+        }
+
+        // Preload images for the Prod container
+        for (let i = 0; i < prodTotalFrames; i++) {
+            const img = new Image();
+            img.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-product-showcase-desktop/home-product-showcase-desktop${i.toString().padStart(3, '0')}.jpg`;
+        }
+    }
+
+    // Call the preload function when the page loads
+    window.onload = preloadImages;
+
+
     // Update Frame Source for First Animation
     function updateFrame(frameIndex) {
         frameElement.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop${frameIndex.toString().padStart(3, '0')}.jpg`;
