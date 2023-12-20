@@ -140,7 +140,7 @@
         </div>
     </div>
     <div id="animation-container" style="">
-        <img id="frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/mobile/home-entrance-mobile000.avif" alt="Animated Frame">
+        <img id="frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-mobile000.avif" alt="Animated Frame">
     </div>
     <button id="start-button" style="display: none;">Click to start</button>
     <div id="video-container">
@@ -227,7 +227,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
     }
 
     // Usage
-    const baseUrl = "https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/mobile/home-entrance-mobile";
+    const baseUrl = "https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-mobile";
     const imageUrls = generateImageUrls(baseUrl, 1, 249); // Adjust the range as needed
     preloadImages(imageUrls);
 
@@ -237,7 +237,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
 
     // Update Frame Source for First Animation
     function updateFrame(frameIndex) {
-        frameElement.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/mobile/home-entrance-mobile${frameIndex.toString().padStart(3, '0')}.avif`;
+        frameElement.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-mobile${frameIndex.toString().padStart(3, '0')}.avif`;
     }
 
     // Initial Frame Animation for First Animation
