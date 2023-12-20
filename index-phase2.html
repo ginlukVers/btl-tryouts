@@ -503,16 +503,6 @@ height: 100vh; object-fit: cover;"></video>
     });
 
 
-      const appleSequenceImages = [];
-    const treeSequenceImages = [];
-
-    for (let i = 0; i <= 360; i++) {
-        appleSequenceImages.push(`${`000${i}`.slice(-3)}.avif`);
-    }
-    for (let i = 0; i <= 24; i++) {
-        treeSequenceImages.push(`${`000${i}`.slice(-3)}.avif`);
-    }
-
     // Preload function for Apple Sequence
     function preloadAppleSequence() {
         appleSequenceImages.forEach(imgName => {
