@@ -208,28 +208,28 @@ height: 100vh; object-fit: cover;"></video>
     // window.onload = preloadImages;
 
 
-function preloadImages(urls) {
-    urls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-        img.onload = () => console.log(`Image preloaded: ${url}`);
-        img.onerror = () => console.error(`Failed to preload image: ${url}`);
-    });
-}
-
-function generateImageUrls(baseUrl, start, end) {
-    const urls = [];
-    for (let i = start; i <= end; i++) {
-        const paddedNumber = i.toString().padStart(3, '0');
-        urls.push(`${baseUrl}${paddedNumber}.avif`);
+    function preloadImages(urls) {
+        urls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+            img.onload = () => console.log(`Image preloaded: ${url}`);
+            img.onerror = () => console.error(`Failed to preload image: ${url}`);
+        });
     }
-    return urls;
-}
 
-// Usage
-const baseUrl = "https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop";
-const imageUrls = generateImageUrls(baseUrl, 1, 249); // Adjust the range as needed
-preloadImages(imageUrls);
+    function generateImageUrls(baseUrl, start, end) {
+        const urls = [];
+        for (let i = start; i <= end; i++) {
+            const paddedNumber = i.toString().padStart(3, '0');
+            urls.push(`${baseUrl}${paddedNumber}.avif`);
+        }
+        return urls;
+    }
+
+    // Usage
+    const baseUrl = "https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop";
+    const imageUrls = generateImageUrls(baseUrl, 1, 249); // Adjust the range as needed
+    preloadImages(imageUrls);
 
 
 
