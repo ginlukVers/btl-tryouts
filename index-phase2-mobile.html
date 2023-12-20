@@ -174,7 +174,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
     for (let i = 0; i <= 339; i++) {
         appleSequenceImages.push(`${`000${i}`.slice(-3)}.avif`);
     }
-    for (let i = 0; i <= 24; i++) {
+    for (let i = 0; i <= 23; i++) {
         treeSequenceImages.push(`${`000${i}`.slice(-3)}.avif`);
     }
 
@@ -509,7 +509,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
         scrollWith: '.apple-container',
         images: appleSequenceImages,
         imagesRoot: 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-product-showcase/home-product-showcase-mobile',
-        priorityFrames: [0, 20, 40, 60, 90],
+        priorityFrames: [0, 1, 2, 3, 4],
         cover: true,
         playUntil: 'scroll-out',
         starts: 'in'
@@ -520,7 +520,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
         scrollWith: '.tree-container',
         images: treeSequenceImages,
         imagesRoot: 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-configurator/home-configurator-mobile',
-        priorityFrames: [0, 20, 40, 60, 90],
+        priorityFrames: [0, 1, 2, 3, 4],
         cover: true,
         starts: 'out',
         ends: 'in'
@@ -559,7 +559,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
 
     // Usage
     const baseUrl = "https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-product-showcase/home-product-showcase-mobile";
-    const imageUrls = generateImageUrls(baseUrl, 1, 360); // Adjust the range as needed
+    const imageUrls = generateImageUrls(baseUrl, 1, 339); // Adjust the range as needed
     preloadImages(imageUrls);
 
 
