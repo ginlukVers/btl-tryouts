@@ -129,48 +129,7 @@
       }
     }
 
-    #preloader {
-        background-color: #000000;
-        width: 100vw;
-        height: 100vh;
-        z-index: 20;
-    }
 
-    .preloader {
-      z-index: 20;
-      top:0;
-      bottom:0;
-      left:0;
-      right:0;
-      position:absolute;
-      margin:auto;
-      width: 40px;
-      height: 40px;
-      border-radius: 100%;
-      border: 4px solid grey;
-      border-top: 4px solid white;
-      border-right: 4px solid white;
-      border-bottom: 4px solid white;
-      -webkit-animation: spin 1s linear infinite;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    @-webkit-keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-      }
-    }
     </style>
 </head>
 
@@ -239,16 +198,41 @@ height: 100vh; object-fit: cover;"></video>
     let scrollAnimationEnabled = false;
     const viewportHeight = window.innerHeight;
 
-    function preloadImages() {
-        // Preload images for the first animation
-        for (let i = 0; i < totalFrames; i++) {
-            const img = new Image();
-            img.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop${i.toString().padStart(3, '0')}.avif`;
-        }
-    }
+    // function preloadImages() {
+    //     // Preload images for the first animation
+    //         const img = new Image();
+    //         img.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop${i.toString().padStart(3, '0')}.avif`;
+    // }
 
-    // Call the preload function when the page loads
-    window.onload = preloadImages;
+    // // Call the preload function when the page loads
+    // window.onload = preloadImages;
+
+
+function preloadImages(urls) {
+    urls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => console.log(`Image preloaded: ${url}`);
+        img.onerror = () => console.error(`Failed to preload image: ${url}`);
+    });
+}
+
+function generateImageUrls(baseUrl, start, end) {
+    const urls = [];
+    for (let i = start; i <= end; i++) {
+        const paddedNumber = i.toString().padStart(3, '0');
+        urls.push(`${baseUrl}${paddedNumber}.avif`);
+    }
+    return urls;
+}
+
+// Usage
+const baseUrl = "https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop";
+const imageUrls = generateImageUrls(baseUrl, 1, 249); // Adjust the range as needed
+preloadImages(imageUrls);
+
+
+
 
 
     // Update Frame Source for First Animation
