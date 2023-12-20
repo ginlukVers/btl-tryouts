@@ -85,27 +85,16 @@
         min-height: 100%;
     }
 
-    #prod-container {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: calc(2000px + 100vh);
-        background-color: white;
-    }
 
-    #prod-container-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
     #preloader {
         background-color: #000000;
         width: 100vw;
         height: 100vh;
+        z-index: 20;
     }
 
     .preloader {
-        z-index: 20;
+      z-index: 20;
       top:0;
       bottom:0;
       left:0;
@@ -115,12 +104,12 @@
       width: 40px;
       height: 40px;
       border-radius: 100%;
-    border: 4px solid grey;
-    border-top: 4px solid white;
-    border-right: 4px solid white;
-    border-bottom: 4px solid white;
-    -webkit-animation: spin 1s linear infinite;
-    animation: spin 1s linear infinite;
+      border: 4px solid grey;
+      border-top: 4px solid white;
+      border-right: 4px solid white;
+      border-bottom: 4px solid white;
+      -webkit-animation: spin 1s linear infinite;
+      animation: spin 1s linear infinite;
     }
     @keyframes spin {
         0% {
@@ -149,7 +138,7 @@
         </div>
     </div>
     <div id="animation-container" style="">
-        <img id="frame" src="" alt="Animated Frame">
+        <img id="frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop000.avif" alt="Animated Frame">
     </div>
     <button id="start-button" style="display: none;">Click to start</button>
     <div id="video-container">
@@ -157,12 +146,8 @@
         <video _ngcontent-serverapp-c263="" src="https://github.com/ginlukVers/btl-tryouts/raw/main/assets/96f8-46b3-8f41-ad49158738d5.mp4" autoplay loop style="margin: 0 auto; width: 100%;
 height: 100vh; object-fit: cover;"></video>
     </div>
-    <div id="prod-container">
-        <h3>Title text</h3>
-        <p>Description text</p>
-        <img id="prod-container-img" src="" alt="Product Showcase">
-        <!-- Other content if needed -->
-    </div>
+    
+
     <script type="text/javascript">
     // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
@@ -185,16 +170,16 @@ height: 100vh; object-fit: cover;"></video>
                         preloader.style.display = 'none';
                     }
                 }, 200);
-            }, 4000);
+            }, 5000);
         };
     });
     </script>
+
     <script>
     // DOM Elements
     const frameElement = document.getElementById('frame');
     const startButton = document.getElementById('start-button');
     const videoContainer = document.getElementById('video-container');
-    const prodElement = document.getElementById('prod-container-img'); // Ensure you have this element in your HTML
 
     // Animation Parameters for First Animation
     const totalFrames = 249;
@@ -205,10 +190,6 @@ height: 100vh; object-fit: cover;"></video>
     const animationStart = 0; // Start of first scroll animation
     const animationEnd = 2000; // End of first scroll animation
 
-    // Animation Parameters for Prod Container
-    const prodTotalFrames = 360;
-    const prodAnimationStart = 2000; // Start after the first animation ends
-    const prodAnimationEnd = prodAnimationStart + 3000; // 1000px scroll range for prod animation
 
     // State Variables
     let currentFrame = 0;
@@ -221,12 +202,6 @@ height: 100vh; object-fit: cover;"></video>
             const img = new Image();
             img.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop${i.toString().padStart(3, '0')}.avif`;
         }
-
-        // Preload images for the Prod container
-        for (let i = 0; i < prodTotalFrames; i++) {
-            const img = new Image();
-            img.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-product-showcase-desktop/home-product-showcase-desktop${i.toString().padStart(3, '0')}.avif`;
-        }
     }
 
     // Call the preload function when the page loads
@@ -236,11 +211,6 @@ height: 100vh; object-fit: cover;"></video>
     // Update Frame Source for First Animation
     function updateFrame(frameIndex) {
         frameElement.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop${frameIndex.toString().padStart(3, '0')}.avif`;
-    }
-
-    // Update Frame Source for Prod Container
-    function updateProdFrame(frameIndex) {
-        prodElement.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-product-showcase-desktop/home-product-showcase-desktop${frameIndex.toString().padStart(3, '0')}.avif`;
     }
 
     // Initial Frame Animation for First Animation
@@ -321,15 +291,6 @@ height: 100vh; object-fit: cover;"></video>
             startButton.style.display = scrollPos === 0 ? 'block' : 'none';
         }
 
-        // Prod Container Animation Logic
-        if (scrollPos >= prodAnimationStart && scrollPos <= prodAnimationEnd) {
-            const prodScrollFraction = (scrollPos - prodAnimationStart) / (prodAnimationEnd - prodAnimationStart);
-            const prodFrameIndex = Math.min(
-                Math.floor(prodScrollFraction * prodTotalFrames),
-                prodTotalFrames - 1
-            );
-            updateProdFrame(prodFrameIndex);
-        }
     }
 
 
