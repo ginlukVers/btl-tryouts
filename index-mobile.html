@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Homepage phase 1</title>
+    <link rel="icon" type="image/x-icon" href="https://github.com/ginlukVers/btl-tryouts/raw/main/favicon.ico">
+    <style>
+        body,
+    html {
+        margin: 0;
+        padding: 0;
+        height: 3000px;
+        overflow-x: hidden;
+        background-color: #000000;
+    }
+
+    #animation-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #frame {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #start-button {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        /* Initially hidden */
+
+        color: var(--Buttons-button-content-primary, #FFF);
+
+        /* Desktop/Buttons/Medium */
+        font-family: sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 750;
+        line-height: 24px;
+        /* 133.333% */
+        letter-spacing: -0.18px;
+        z-index: 10;
+        display: flex;
+        width: 227px;
+        padding: 20px 40px;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        border: none;
+        border-radius: var(--Radius-full, 1000px);
+        background: var(--Gradient-Button, linear-gradient(266deg, #FF7900 -60.92%, #4B3278 93.86%));
+        cursor: pointer;
+    }
+
+    #video-container {
+        /* Initial styles for video-container */
+        width: 10vw;
+        height: 10vh;
+        position: absolute;
+        top: 2000px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        border-radius: 1000px;
+        opacity: 0;
+        transition: all 3s ease-in-out;
+        overflow: hidden;
+        text-align: center;
+    }
+
+
+    #myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+    }
+
+
+    #preloader {
+        background-color: #000000;
+        width: 100vw;
+        height: 100vh;
+        z-index: 20;
+    }
+
+    .preloader {
+      z-index: 20;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0;
+      position:absolute;
+      margin:auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      border: 4px solid grey;
+      border-top: 4px solid white;
+      border-right: 4px solid white;
+      border-bottom: 4px solid white;
+      -webkit-animation: spin 1s linear infinite;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+      }
+    }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="preloader">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+    <div id="animation-container" style="">
+        <img id="frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/mobile/home-entrance-desktop000.avif" alt="Animated Frame">
+    </div>
+    <button id="start-button" style="display: none;">Click to start</button>
+    <div id="video-container">
+        <video src="https://github.com/ginlukVers/btl-tryouts/raw/main/assets/96f8-46b3-8f41-ad49158738d5.mp4" autoplay loop autoplay loop muted webkit-playsinline playsinline style="margin: 0 auto; width: 100%;
+height: 100vh; object-fit: cover;" type="video/mp4">
+    Your browser does not support the video tag.</video>
+    </div>
+    
+
+    <script type="text/javascript">
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait for the window to load
+        window.onload = function() {
+            // Set a timeout to run after 2000 milliseconds (2 seconds)
+            setTimeout(function() {
+                // Select the element with the id 'preloader'
+                var preloader = document.getElementById('preloader');
+                // Create a function to fade out the preloader
+                var fadeEffect = setInterval(function() {
+                    if (!preloader.style.opacity) {
+                        preloader.style.opacity = 1;
+                    }
+                    if (preloader.style.opacity > 0) {
+                        preloader.style.opacity -= 0.1;
+                    } else {
+                        clearInterval(fadeEffect);
+                        // Once the fade out is complete, hide the preloader
+                        preloader.style.display = 'none';
+                    }
+                }, 200);
+            }, 5000);
+        };
+    });
+    </script>
+
+    <script>
+    // DOM Elements
+    const frameElement = document.getElementById('frame');
+    const startButton = document.getElementById('start-button');
+    const videoContainer = document.getElementById('video-container');
+
+    // Animation Parameters for First Animation
+    const totalFrames = 249;
+    const initialAnimationFrames = 28;
+    const documentHeight = 2000; // Increased to accommodate both animations
+    const frameRate = 1000 / 30; // 30 FPS
+    const scrollAnimationDuration = 8000; // Scroll animation duration in milliseconds
+    const animationStart = 0; // Start of first scroll animation
+    const animationEnd = 2000; // End of first scroll animation
+
+
+    // State Variables
+    let currentFrame = 0;
+    let scrollAnimationEnabled = false;
+    const viewportHeight = window.innerHeight;
+
+    // function preloadImages() {
+    //     // Preload images for the first animation
+    //         const img = new Image();
+    //         img.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/home-entrance-desktop${i.toString().padStart(3, '0')}.avif`;
+    // }
+
+    // // Call the preload function when the page loads
+    // window.onload = preloadImages;
+
+
+    function preloadImages(urls) {
+        urls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+            img.onload = () => console.log(`Image preloaded: ${url}`);
+            img.onerror = () => console.error(`Failed to preload image: ${url}`);
+        });
+    }
+
+    function generateImageUrls(baseUrl, start, end) {
+        const urls = [];
+        for (let i = start; i <= end; i++) {
+            const paddedNumber = i.toString().padStart(3, '0');
+            urls.push(`${baseUrl}${paddedNumber}.avif`);
+        }
+        return urls;
+    }
+
+    // Usage
+    const baseUrl = "https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/mobile/home-entrance-desktop";
+    const imageUrls = generateImageUrls(baseUrl, 1, 249); // Adjust the range as needed
+    preloadImages(imageUrls);
+
+
+
+
+
+    // Update Frame Source for First Animation
+    function updateFrame(frameIndex) {
+        frameElement.src = `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/homepage-assets/mobile/home-entrance-desktop${frameIndex.toString().padStart(3, '0')}.avif`;
+    }
+
+    // Initial Frame Animation for First Animation
+
+    function startInitialAnimation() {
+        setTimeout(function() {
+            const initialAnimationInterval = setInterval(() => {
+                if (currentFrame < initialAnimationFrames) {
+                    updateFrame(currentFrame);
+                    currentFrame++;
+                } else {
+                    clearInterval(initialAnimationInterval);
+                    currentFrame = initialAnimationFrames - 1;
+                    scrollAnimationEnabled = true;
+                    startButton.style.display = 'block'; // Show the button
+                }
+            }, frameRate);
+        }, 6000); // 2 seconds delay
+    }
+
+
+
+    // Smooth Scroll Function
+    function smoothScrollTo(targetPosition, duration) {
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+
+        requestAnimationFrame(animation);
+    }
+
+    // Scroll Event Handler
+    function handleScroll() {
+        const scrollPos = window.pageYOffset;
+
+        // Video Container Animation
+        const viewportMiddle = scrollPos + viewportHeight / 2;
+        if (viewportMiddle >= animationEnd) {
+            videoContainer.style.width = '100vw';
+            videoContainer.style.height = '100vh';
+            videoContainer.style.borderRadius = '0px';
+            videoContainer.style.opacity = 1;
+        } else {
+            videoContainer.style.width = '10vw';
+            videoContainer.style.height = '10vh';
+            videoContainer.style.borderRadius = '100px';
+            videoContainer.style.opacity = 0;
+        }
+
+        // Frame Update for Scroll Animation
+        if (scrollAnimationEnabled) {
+            if (scrollPos >= animationStart && scrollPos <= animationEnd) {
+                const scrollFraction = (scrollPos - animationStart) / (animationEnd - animationStart);
+                const frameIndex = Math.min(
+                    Math.floor(scrollFraction * (totalFrames - initialAnimationFrames)) + initialAnimationFrames,
+                    totalFrames - 1
+                );
+                updateFrame(frameIndex);
+            }
+
+            // Show or hide the start button based on scroll position
+            startButton.style.display = scrollPos === 0 ? 'block' : 'none';
+        }
+
+    }
+
+
+    // Event Listeners
+    window.addEventListener('scroll', handleScroll);
+    startButton.addEventListener('click', function() {
+        document.body.style.height = `${documentHeight}px`;
+        smoothScrollTo(animationEnd, scrollAnimationDuration);
+    });
+
+    // Start Initial Animation
+    startInitialAnimation();
+    </script>
+</body>
+
+</html>
