@@ -7,6 +7,21 @@
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
     <title>Homepage phase 2</title>
     <style>
+    :root {
+        font-size: 18px;
+        font-family: "Open Sans", sans-serif;
+        color: #2D2346;
+        text-align: center;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    }
+
+    body {
+        margin: 0;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
     .scroll-container {
         height: 100vh;
         /*  background: black;*/
@@ -55,21 +70,7 @@
         }
     }
 
-    :root {
-        font-size: 18px;
-        font-family: "Open Sans", sans-serif;
-        color: #2D2346;
-        text-align: center;
-        text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-    }
-
-    body {
-        margin: 0;
-    }
-
-    * {
-        box-sizing: border-box;
-    }
+    
 
     #video-container {
         /* Initial styles for video-container */
@@ -99,22 +100,20 @@
     }
     </style>
     <script>
-    window.console = window.console || function(t) {};
+        window.console = window.console || function(t) {};
     </script>
 </head>
 
 <body translate="no">
-
     <div id="preloader">
         <div class="preloader">
             <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
         </div>
     </div>
-
-    <<div id="video-container">
+    <div id="video-container">
         <video src="https://github.com/ginlukVers/btl-tryouts/raw/main/assets/96f8-46b3-8f41-ad49158738d5.mp4" autoplay loop autoplay loop muted webkit-playsinline playsinline style="margin: 0 auto; width: 100%;
 height: 100vh; object-fit: cover;" type="video/mp4">
-    Your browser does not support the video tag.</video>
+            Your browser does not support the video tag.</video>
     </div>
     <div class="container scroll-container">
         <section class="scroll-sequence__container apple-container">
@@ -142,9 +141,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
         <!--   <div class="spacer"></div> -->
     </div>
     <script src='https://unpkg.com/scroll-out@2.2.3/dist/scroll-out.min.js'></script>
-
-
- <script type="text/javascript">
+    <script type="text/javascript">
     // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
         // Wait for the window to load
@@ -170,7 +167,6 @@ height: 100vh; object-fit: cover;" type="video/mp4">
         };
     });
     </script>
-
     <script id="rendered-js">
     const appleSequenceImages = [];
     const treeSequenceImages = [];
@@ -578,8 +574,6 @@ height: 100vh; object-fit: cover;" type="video/mp4">
 
     // Call preload functions
     preloadTreeSequence();
-
-
     </script>
 </body>
 
