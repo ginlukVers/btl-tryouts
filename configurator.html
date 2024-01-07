@@ -90,11 +90,11 @@
     const frameCount = 165;
     const imageCache = [null]; // Start with null at index 0 for convenience
     let currentStep = 1;
-    const frameRate = 30; // Time in milliseconds for each frame
+    const frameRate = 40; // Time in milliseconds for each frame
 
     const framesPerStep = [21, 69, 75, 1]; // Number of frames to load for each step
 
-    const currentFrame = index => `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets//configurator_desktop_white_${index.toString().padStart(5, '0')}.avif`;
+    const currentFrame = index => `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator_desktop_white_${index.toString().padStart(5, '0')}.avif`;
 
     // const currentFrame = index => `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator_desktop_white_${index.toString().padStart(5, '0')}.avif`;
 
