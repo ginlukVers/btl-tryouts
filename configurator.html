@@ -25,14 +25,15 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
+        width: 100vw;
     }
 
     .image-frame {
         max-width: 100%;
         max-height: 100%;
-        width: auto;
+        width: 100vw;
         height: auto;
-        object-fit: contain;
+        object-fit: cover;
     }
 
     #side-block {
@@ -75,7 +76,9 @@
 <body>
     <div id="main-container">
         <div id="image-container">
-            <img id="hero-lightpass" class="image-frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator-white-desktop_00001.avif" alt="Image Frame">
+            <img id="hero-lightpass" class="image-frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator_desktop_white_00001.avif" alt="Image Frame">
+            
+            <!-- <img id="hero-lightpass" class="image-frame" src="/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator_desktop_white_00001.avif" alt="Image Frame"> -->
         </div>
         <div id="side-block">
             <button id="loadImages" class="button-primary">Next</button>
@@ -84,14 +87,16 @@
     </div>
     <script>
     let currentImageIndex = 1;
-    const frameCount = 68;
+    const frameCount = 165;
     const imageCache = [null]; // Start with null at index 0 for convenience
     let currentStep = 1;
-    const frameRate = 100; // Time in milliseconds for each frame
+    const frameRate = 30; // Time in milliseconds for each frame
 
-    const framesPerStep = [20, 38, 10, 1]; // Number of frames to load for each step
+    const framesPerStep = [21, 69, 75, 1]; // Number of frames to load for each step
 
-    const currentFrame = index => `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator-white-desktop_${index.toString().padStart(5, '0')}.avif`;
+    const currentFrame = index => `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets//configurator_desktop_white_${index.toString().padStart(5, '0')}.avif`;
+
+    // const currentFrame = index => `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator_desktop_white_${index.toString().padStart(5, '0')}.avif`;
 
     const preloadFirstImage = () => {
         const img = new Image();
