@@ -2,12 +2,12 @@
 
 # Variables
 INPUT_FORMAT=png  # e.g., jpg, png
-OUTPUT_FORMAT=avif  # e.g., webp, png
+OUTPUT_FORMAT=webp  # e.g., webp, png
 SOURCE_DIR=${1:-$(pwd)}  # Default to current directory if not provided
 DEST_DIR=${2:-$SOURCE_DIR}  # Default to source directory if not provided
 BASE_FILENAME="configurator_desktop_white_"  # Base name for output files
 WIDTH=840  # Output width
-QUALITY=85  # Output quality (for certain formats like JPEG, WebP)
+QUALITY=90  # Output quality (for certain formats like JPEG, WebP)
 
 # Counter for filename
 COUNTER=1

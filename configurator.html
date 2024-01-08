@@ -76,9 +76,9 @@
 <body>
     <div id="main-container">
         <div id="image-container">
-            <img id="hero-lightpass" class="image-frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator_desktop_white_00001.avif" alt="Image Frame">
+            <img id="hero-lightpass" class="image-frame" src="https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator_desktop_white_00001.webp" alt="Image Frame">
             
-            <!-- <img id="hero-lightpass" class="image-frame" src="/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator_desktop_white_00001.avif" alt="Image Frame"> -->
+            <!-- <img id="hero-lightpass" class="image-frame" src="/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator_desktop_white_00001.webp" alt="Image Frame"> -->
         </div>
         <div id="side-block">
             <button id="loadImages" class="button-primary">Next</button>
@@ -94,9 +94,9 @@
 
     const framesPerStep = [21, 69, 75, 1]; // Number of frames to load for each step
 
-    const currentFrame = index => `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator_desktop_white_${index.toString().padStart(5, '0')}.avif`;
+    const currentFrame = index => `https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/configurator-assets/configurator_desktop_white_${index.toString().padStart(5, '0')}.webp`;
 
-    // const currentFrame = index => `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator_desktop_white_${index.toString().padStart(5, '0')}.avif`;
+    // const currentFrame = index => `/Users/dz382/Documents/GitHub/Versuni/btl-tryouts/configurator-assets/configurator_desktop_white_${index.toString().padStart(5, '0')}.webp`;
 
     const preloadFirstImage = () => {
         const img = new Image();
