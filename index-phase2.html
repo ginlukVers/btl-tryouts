@@ -214,10 +214,10 @@ height: 100vh; object-fit: cover;" type="video/mp4">
     const treeSequenceImages = [];
 
     for (let i = 0; i <= 360; i++) {
-        appleSequenceImages.push(`${`000${i}`.slice(-3)}.avif`);
+        appleSequenceImages.push(`${`00000${i}`.slice(-5)}.webp`);
     }
     for (let i = 0; i <= 23; i++) {
-        treeSequenceImages.push(`${`000${i}`.slice(-3)}.avif`);
+        treeSequenceImages.push(`${`00000${i}`.slice(-5)}.webp`);
     }
 
     const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -593,8 +593,8 @@ height: 100vh; object-fit: cover;" type="video/mp4">
     function generateImageUrls(baseUrl, start, end) {
         const urls = [];
         for (let i = start; i <= end; i++) {
-            const paddedNumber = i.toString().padStart(3, '0');
-            urls.push(`${baseUrl}${paddedNumber}.avif`);
+            const paddedNumber = i.toString().padStart(5, '0');
+            urls.push(`${baseUrl}${paddedNumber}.webp`);
         }
         return urls;
     }
