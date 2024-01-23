@@ -215,8 +215,8 @@ height: 100vh; object-fit: cover;" type="video/mp4">
     for (let i = 0; i <= 360; i++) {
         appleSequenceImages.push(`${`00000${i}`.slice(-5)}.webp`);
     }
-    for (let i = 0; i <= 23; i++) {
-        treeSequenceImages.push(`${`00000${i}`.slice(-5)}.webp`);
+    for (let i = 0; i <= 99; i++) {
+        treeSequenceImages.push(`${`000${i}`.slice(-3)}.webp`);
     }
 
     const requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -560,7 +560,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
         container: '.tree-sequence',
         scrollWith: '.tree-container',
         images: treeSequenceImages,
-        imagesRoot: 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-configurator/Baristina_BAR300_XX_BAR310_50_HomePage_ConfiguratorEntrance_Desktop_',
+        imagesRoot: 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-configurator/BAR301_03-BAR301_63-configurator-entrance-desktop-step-',
         priorityFrames: [0, 20, 40, 60, 90],
         cover: true,
         starts: 'out',
@@ -609,7 +609,7 @@ height: 100vh; object-fit: cover;" type="video/mp4">
     function preloadTreeSequence() {
         treeSequenceImages.forEach(imgName => {
             const img = new Image();
-            img.src = 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-configurator/Baristina_BAR300_XX_BAR310_50_HomePage_ConfiguratorEntrance_Desktop_' + imgName;
+            img.src = 'https://raw.githubusercontent.com/ginlukVers/btl-tryouts/main/home-configurator/BAR301_03-BAR301_63-configurator-entrance-desktop-step-' + imgName;
         });
     }
 
